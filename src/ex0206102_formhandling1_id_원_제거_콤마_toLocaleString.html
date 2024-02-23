@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Form Handling with JavaScript</title>
+	<link href="css/ex02061.css" rel = "stylesheet" type="text/css">
+	<style>
+	body {
+		text-align:center;
+		font-size:25px;
+	}
+	table {
+		width: 700px;
+		margin : 0 auto;
+	}
+	
+	td:first-child {
+		background-color: yellow;
+	}
+
+	td:last-child {
+		background-color: green;
+	}
+
+	td:last-child>td:first-child {
+		background-color: white;
+	}
+	
+	table, th, td {
+		border: 1px solid gray
+	}
+	
+	#book1:focus, #book2:focus, #book3:focus {
+		outline:none;
+		border: 2px solid red
+	}
+	
+	td:nth-child(4) input:focus, #totalNumber:focus {
+		outline:none;
+	}
+	
+	
+	</style>
+</head>
+<body>
+	<h2>서적 주문 양식</h2>
+	<form action = "result.html" method = "get">
+		<!-- 입력할 때 마다 변경됩니다. -->
+		<table>
+			<tr>
+				<th>책 제목</th>
+				<th>가격</th>
+				<th>수량</th>
+				<th>합계</th>
+			</tr>
+			<tr>
+				<td>4차 산업</td>
+				<td class = "price">30,000원</td>
+				<td><input id ="book1" type="text" size="2" value="0"
+						   onclick="this.select();"></td>
+				<!-- 이벤트 핸들러를 직접 기술하여 등록방식
+						this.select(0는 각 서적 수량을 표시하는 텍스트 박스를
+							클릭하면 그 값이 선택되도록 하는 기능을 갖는다.)
+						this는 <input> 요소의 DOM을 가리키게 된다.
+							즉, 사진이 속한 DOM을 가리키는 것이다. -->
+				
+				<td><input id="book1Total" type="text" size="6" value="0" readOnly>원</td>
+			</tr>
+			<tr>
+				<td>다이어트</td>
+				<td class = "price">27,000원</td>
+				<td><input id ="book2" type="text" size="2" value="0"
+						   onclick="this.select();"></td>
+				<td><input id="book2Total" type="text" size="6" value="0" readOnly>원</td>
+			</tr>
+			<tr>
+				<td>윤식당</td>
+				<td class = "price">25,000원</td>
+				<td><input id ="book3" type="text" size="2" value="0"
+						   onclick="this.select();"></td>
+				<td><input id="book3Total" type="text" size="6" value="0" readOnly>원</td>
+			</tr>
+			<tr>
+				<td >합계</td>
+				<td>&nbsp;</td>
+				<td><input id ="totalNumber" type="text" size="2" value="0"></td>
+				<td><input id ="totalPrice" type="text" size="6" value="0" readOnly>원</td>
+			</tr>
+		</table>
+		<br>
+			
+		<input type="reset" 	value="초기화">
+		<input type="submit" 	value="제출">
+	</form>
+<script>
+	function updateAll() {
+		// 각 가격 구하기
+		var prices = document.getElementsByClassName('price');
+		var book1Price = parseInt(prices[0].textContent.replace(/,|원/g, ""));
+		var book2Price = parseInt(prices[1].textContent.replace(/,|원/g, ""));
+		var book3Price = parseInt(prices[2].textContent.replace(/,|원/g, ""));
+		
+		// 입력 수량 구하기
+		var quantity1 = parseInt(document.getElementById("book1").value);
+		var quantity2 = parseInt(document.getElementById("book2").value);
+		var quantity3 = parseInt(document.getElementById("book3").value);
+		
+		// 각 서적의 총 가격 계산
+		var total1 = book1Price * quantity1;
+		var total2 = book2Price * quantity2;
+		var total3 = book3Price * quantity3;
+		
+		// 각 서적의 총 가격을 텍스트 상자에 표시
+		document.getElementById("book1Total").value = total1.toLocaleString() + "원";
+		document.getElementById("book2Total").value = total2.toLocaleString() + "원";
+		document.getElementById("book3Total").value = total3.toLocaleString() + "원";
+		
+		// 전체 합계 계산
+		var totalNumber = quantity1 + quantity2 + quantity3;
+		var totalPrice = total1 + total2 + total3;
+		
+		// 전체 합계를 텍스트 상자에 표시
+		document.getElementById("totalNumber").value = totalNumber;
+		document.getElementById("totalPrice").value = totalPrice.toLocaleString() + "원";
+	}// fucntion end
+	
+	document.getElementsByTagName('form')[0].addEventListener('input', updateAll);
+</script>
+</body>
+</html>

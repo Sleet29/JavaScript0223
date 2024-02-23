@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>모든 체크박스 선택/해제</title>
+</head>
+<body>
+	<h3>선택한 그림 출력</h3>
+    <div> radio 버튼을 클릭하면 이미지 바뀝니다.</div>
+    <hr>
+    <form>
+        <label><input type="radio" class="icon" name="icon" value='image/image1.png'>image1</label><br>
+        <label><input type="radio" class="icon" name="icon" value='image/image2.png' checked>image2</label><br>
+        <label><input type="radio" class="icon" name="icon" value='image/image3.png'>image3</label><br>
+        <img src='image/image2.png' id="iconImg">
+    </form>
+    
+    <script>
+        var icons = document.querySelectorAll('.icon');
+        for(var i = 0; i < icons.length; i++) {
+            icons[i].addEventListener('click', show);
+        }
+        
+        function show() {
+        	var img = document.querySelector('#iconImg'); // 이미지 요소를 가져옴
+            var selectedImage = document.querySelector('input[name="icon"]:checked'); // 선택된 라디오 버튼을 가져옴
+        	img.src = selectedImage.value; // 이미지 요소의 src를 선택된 라디오 버튼의 value로 변경
+        }
+    </script>
+</body>
+</html>

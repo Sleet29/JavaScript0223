@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>모든 체크박스 선택/해제</title>
+</head>
+<body>
+    <div> 모든 체크박스 선택/해제 (checked 속성 이용하기)</div>
+    <hr>
+    <form>
+        <label><input type="checkbox" id="all" value='모두 선택/해제'>ALL</label><br>
+        <label><input type="checkbox" class="icon" value='image/image1.png'>image1</label><br>
+        <label><input type="checkbox" class="icon" value='image/image2.png'>image2</label><br>
+        <label><input type="checkbox" class="icon" value='image/image3.png'>image3</label><br>
+    </form>
+    
+    <script>
+        var all = document.getElementById('all');
+        var checkboxes = document.querySelectorAll('.icon');
+
+        all.addEventListener('click', function() {
+            checkboxes.forEach(function(checkbox) {
+                checkbox.checked = all.checked;
+            });
+        });
+
+        checkboxes.forEach(function(checkbox) {
+            checkbox.addEventListener('click', function() {
+                if (!this.checked) {
+                    all.checked = false;
+                } else {
+                    var allChecked = true;
+                    checkboxes.forEach(function(checkbox) {
+                        if (!checkbox.checked) {
+                            allChecked = false;
+                        }
+                    });
+                    all.checked = allChecked;
+                }
+            });
+        });
+    </script>
+</body>
+</html>

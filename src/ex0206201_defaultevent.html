@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<link href="css/ex02062.css" type="text/css" rel="stylesheet">
+	<title>콤마 제거와 콤마 넣기</title>
+	<style>
+	body {
+	margin: 20px auto
+}
+
+fieldset {
+	margin: 0 auto;
+	width: 400px
+}
+
+legend {
+	text-align: center
+}
+
+form {
+	margin: 0 auto;
+	width: 500px
+}
+
+label {
+	display: inline-block;
+	width: 150px;
+	color: purple;
+	text-align: right
+}
+
+input {
+	border-radius: 3px;
+	border: 1px solid green;
+	height: 23px;
+	width: 200px;
+	margin-bottom: 5px;
+	box-sizing: border-box;
+}
+
+input:focus {
+	outline: none;
+	border: 1px dotted green
+}
+
+input[type="submit"] {
+	background: green;
+	height: 30px;
+	color: white;
+	margin-left: 155px
+}
+
+input[type="submit"]:hover {
+	opacity: 0.8;
+	cursor: pointer
+}
+	</style>
+</head>
+<body>
+	<!-- 아무것도 입력하지 않고 제출을 클릭해 봅시다. -->	
+		<form id="my-form" action="ex02052_eventhandling_id.html">
+			<fieldset>
+				<legend>회원가입 폼</legend>
+					<label for="name">이름</label>
+					<input type="text" name="name" id="name"><br>
+
+					<label for="pass">비밀번호</label>
+					<input type="password" name="pass" id="pass"><br>
+
+					<label for="pass-check">비밀번호 확인</label>
+					<input type="password" id="pass-check"><br>
+					
+					<input type = "submit" value="제출">
+			</fieldset>
+		</form>
+</body>
+</html>
