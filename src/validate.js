@@ -1,70 +1,87 @@
-function check() {
-    var id = document.getElementById('id').value.trim();
-    var pass = document.getElementById('pass').value.trim();
-    var jumin1 = document.getElementById('jumin1').value.trim();
-    var jumin2 = document.getElementById('jumin2').value.trim();
-    var email = document.getElementById('email').value.trim();
-    var domain = document.getElementById('domain').value.trim();
-    var hobbyChecked = document.querySelectorAll('input[name="hobby"]:checked').length;
-
-    if (!id || !pass || !jumin1 || !jumin2 || !email || !domain || !hobbyChecked) {
-        alert('항목을 모두 입력해주세요.');
-        return false;
-    }
-
-    if (hobbyChecked < 2) {
-        alert('취미를 2개 이상 선택해주세요.');
-        return false;
-    }
-
-    return true;
+var select = document.querySelector('#icon');
+        var img = document.querySelector('#iconImg');
+        
+        select.addEventListener('change', show);
+        
+        function check() {
+        	var id = document.getElementById("id");
+        	if (id.value.trim() == "") {
+        		alert("ID를 입력 하세요");
+        		id.focus();
+        		return false;
+        	}
+        	
+        	var id = document.getElementById("pass");
+        	if (id.value.trim() == "") {
+        		alert("비밀번호 입력 하세요");
+        		id.focus();
+        		return false;
+        	}
+        	
+        	var jumin1 = document.getElementById("jumin1");
+        	if (id.value.trim() == "") {
+        		alert("주민번호 앞자리를 입력 하세요");
+        		id.focus();
+        		return false;
+        	}
+        	
+        	if (jumin1.value.length != 6) {
+        		alert("주민번호 앞자리 6자리를 입력하세요");
+        		jumin1.value = "";
+        		jumin1.focus();
+        		return false;
+        	}
+        	
+        	var jumin2 = document.getElementById("jumin2");
+        	if (id.value.trim() == "") {
+        		alert("주민번호 뒷자리를 입력 하세요");
+        		jumin2.focus();
+        		return false;
+        	}
+        	
+        	if (jumin2.value.length != 7) {
+        		alert("주민번호 뒷자리 7자리를 입력하세요");
+        		jumin2.value = "";
+        		jumin2.focus();
+        		return false;
+        	}
+        	
+        	
+        	// 라디오 버튼 선택 유효성 검사
+        	var gender1 = document.getElementById("gender1");
+        	var gender2 = document.getElementById("gender2");
+        	if (gender1.checked == false && gender2.checked == false) {
+				alert("남, 여 중에서 1개를 선택하세요");
+				return false;
+			} 
+        	
+        	var cnt = 0;
+        	var hobbys = document.getElementByName("hobby");
+        	for(var i=0;i<hobbys.length;i++) {
+				if(hobbys[i].checked)
+					cnt++;
+			}
+			
+			if (cnt<2) {
+				alert("2개이상 취미를 선택하세요")
+				return false;
+			}
+			
+			// 우편번호 공백 유효성 검사
+			var post1 = document.getElementById("post1");
+			if (post1.value.trim() == "") {
+				alert("우편번호를 입력하세요");
+				post1.focus();
+				return false;
+			}
+			
+			if (hobbyChecked < 2) {
+       		alert('취미를 2개 이상 선택해주세요.');
+        	return false;
+   			}
+   			
+   			return true;
 }
 
-function idcheck() {
-    var id = document.getElementById('id').value.trim();
-
-    if (!id) {
-        alert('ID를 입력하세요.');
-        return;
-    }
-
-    window.open('idcheck.html?id=' + id, '', 'width=300, height=250');
-}
-
-function move() {
-    var jumin1 = document.getElementById('jumin1');
-    var jumin2 = document.getElementById('jumin2');
-
-    if (isNaN(jumin1.value)) {
-        alert('숫자를 입력하세요.');
-        jumin1.focus();
-        return;
-    }
-
-    if (jumin1.value.length === 6) {
-        jumin2.focus();
-    }
-
-    if (isNaN(jumin2.value)) {
-        alert('숫자를 입력하세요.');
-        jumin2.focus();
-        return;
-    }
-}
-
-function domain1() {
-    var select = document.getElementById('sel');
-    var domain = document.getElementById('domain');
-    var selectedOption = select.options[select.selectedIndex].value;
-
-    domain.value = selectedOption;
-}
-
-function post() {
-    new daum.Postcode({
-        oncomplete: function(data) {
-            document.getElementById('post1').value = data.zonecode; // Set the postcode
-            document.getElementById('address').value = data.address; // Set the full address
-        }
-    }).open();
-}
+			
+			
